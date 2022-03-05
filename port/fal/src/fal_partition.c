@@ -409,6 +409,9 @@ int fal_partition_read(const struct fal_partition *part, uint32_t addr, uint8_t 
 
     assert(part);
     assert(buf);
+    
+    if (!size)
+        return 0; // skip unnecessary read
 
     if (addr + size > part->len)
     {
@@ -450,6 +453,9 @@ int fal_partition_write(const struct fal_partition *part, uint32_t addr, const u
 
     assert(part);
     assert(buf);
+    
+    if (!size)
+        return 0; // skip unnecessary write
 
     if (addr + size > part->len)
     {
